@@ -8,6 +8,9 @@ connectDB();
 const cors = require('cors');
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.send("Backend is live 🚀");
+});
 
 app.use(express.json());
 
