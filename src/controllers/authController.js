@@ -18,10 +18,20 @@ exports.signup = async(req , res )=>{
 
     const hashpassword = await bcrypt.hash(password,10);
 
-    const user= await User.create({
-        name,email,password:hashpassword
-    });
-     res.status(201).json({message: "User created successfully"});
+   const user = await User.create({
+  name,
+  email,
+  password: hashpassword
+});
+
+const token = jwt.sign(
+  { id: user._id },
+  process.env.JWT_SECRET,
+  { expiresIn: '1d' }
+);
+
+res.status(201).json({ token });
+
 }catch(error){
      console.error(error);
     return res.status(500).json({error:"Server error"});
