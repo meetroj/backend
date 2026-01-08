@@ -15,6 +15,10 @@ app.get("/", (req, res) => {
 const authRoutes = require('./src/routes/authRoutes');
 app.use('/api/auth', authRoutes);
 
+app.post("/__test", (req, res) => {
+  res.json({ ok: true });
+});
+
 const connectDB = require('./src/config/db');
 
 const PORT = process.env.PORT || 5000;
